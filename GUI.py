@@ -4,6 +4,7 @@ import solveTerminal as so
 import randomBoard as rb
 import GUIHelper
 import csv
+import time
 
 
 class SodokuGrid:
@@ -107,6 +108,10 @@ class SodokuGrid:
             self.checkForWin()
         else:  # wrong input
             print("Wrong Num")
+            # screen.fill(Red, special_flags=pygame.BLEND_ADD)
+            # screen.fill(Red, special_flags=pygame.BLEND_SUB)
+            # self.eraseText(screen)
+            # self.fillGrid(screen)
 
     def placeComment(self, screen, number):
         screen.fill(Black, (self.curSelection[0]*(self.height/9)+4, self.curSelection[1]*(self.width/9)+4, 13, 20))  # delete prev note
@@ -136,6 +141,7 @@ White = (255, 255, 255)
 NeonBlue = (62, 204, 252)
 DarkBlue = (0, 48, 143)
 EmeraldGreen = (10, 221, 8)
+Red = (190, 0, 0)
 
 
 def checkEvents(Grid, screen):
@@ -280,7 +286,6 @@ def GUILoadBoard(clock, FPS, screen):
     gameTextRect = gameText.get_rect()
     gameTextRect.center = (540/2, (540/2)-150)
     screen.blit(gameText, gameTextRect)
-
     inputBox = GUIHelper.InputBox(540/2-250, 540/2-100, 200, 30)
 
     runmenu = True

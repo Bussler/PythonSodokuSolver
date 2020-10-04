@@ -1,4 +1,5 @@
 import pygame
+import win32clipboard
 
 Black = (0, 0, 0)
 White = (255, 255, 255)
@@ -52,6 +53,11 @@ class InputBox:  # simple solution for input box adapted from https://stackoverf
                     # print(self.text)
                     returnVal = self.text
                     self.text = ''
+                elif pygame.key.get_pressed()[pygame.K_LCTRL] and pygame.key.get_pressed()[pygame.K_v]:  # copy/ paste
+                    win32clipboard.OpenClipboard()
+                    copyData = win32clipboard.GetClipboardData()
+                    win32clipboard.CloseClipboard()
+                    self.text += copyData
                 elif event.key == pygame.K_BACKSPACE:
                     self.text = self.text[:-1]
                 else:
