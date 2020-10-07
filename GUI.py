@@ -117,6 +117,7 @@ class SodokuGrid:
         screen.fill(Black, (self.curSelection[0]*(self.height/9)+4, self.curSelection[1]*(self.width/9)+4, 13, 20))  # delete prev note
         myfont = pygame.font.SysFont("comicsans", 30)
         text = myfont.render(str(number), False, EmeraldGreen)
+        self.drawGrid(screen, NeonBlue)
         screen.blit(text, (self.curSelection[0]*(self.height/9)+5, self.curSelection[1]*(self.width/9)+5))
 
     def checkForWin(self):
