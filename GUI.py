@@ -4,6 +4,7 @@ import solveTerminal as so
 import randomBoard as rb
 import GUIHelper
 import csv
+import threading
 import time
 
 
@@ -40,7 +41,7 @@ class SodokuGrid:
             global run
             run = False
             return
-        self.drawGrid(window)
+        self.drawGrid(window, NeonBlue)
         self.fillGrid(window)
         self.checkForWin()
 
@@ -54,15 +55,15 @@ class SodokuGrid:
         pygame.display.update()
         pygame.time.delay(1000)
 
-    def drawGrid(self, window):
+    def drawGrid(self, window, color):
         thiccness = 1
         for i in range(0, 9):
             if i % 3 == 0 and i != 0:
                 thiccness = 5
             else:
                 thiccness = 1
-            pygame.draw.line(window, NeonBlue, (0, i*(self.width/9)), (self.width, i*(self.width/9)), thiccness)
-            pygame.draw.line(window, NeonBlue, (i*(self.height/9), 0), (i*(self.height/9), self.height), thiccness)
+            pygame.draw.line(window, color, (0, i*(self.width/9)), (self.width, i*(self.width/9)), thiccness)
+            pygame.draw.line(window, color, (i*(self.height/9), 0), (i*(self.height/9), self.height), thiccness)
 
     def fillGrid(self, window):
         for i in range(0, 9):
@@ -75,6 +76,7 @@ class SodokuGrid:
                 window.blit(text, (j*(self.height/9)+20, i*(self.width/9)+20))
 
     def showSolution(self, window):
+        self.drawGrid(window, NeonBlue)
         for i in range(0, 9):
             for j in range(0, 9):
                 myfont = pygame.font.SysFont("comicsans", 40)
@@ -106,12 +108,10 @@ class SodokuGrid:
             self.eraseText(screen)
             self.fillGrid(screen)
             self.checkForWin()
+            self.drawGrid(screen, NeonBlue)
         else:  # wrong input
             print("Wrong Num")
-            # screen.fill(Red, special_flags=pygame.BLEND_ADD)
-            # screen.fill(Red, special_flags=pygame.BLEND_SUB)
-            # self.eraseText(screen)
-            # self.fillGrid(screen)
+            self.drawGrid(screen, Red)
 
     def placeComment(self, screen, number):
         screen.fill(Black, (self.curSelection[0]*(self.height/9)+4, self.curSelection[1]*(self.width/9)+4, 13, 20))  # delete prev note
