@@ -5,7 +5,7 @@ Implemented are a solver to solve given Sodokus or randomly create new ones.
 
 #### How to use
 
-Start with GUI.py.
+Initialize with GUI.py.
 
 A sample Sodoku is given for solving when selecting "Start Solving" in the Main Menu.
 
